@@ -1,7 +1,5 @@
 package win.leizhang.demo.blade.ex.controller;
 
-import com.blade.Blade;
-import com.blade.Environment;
 import com.blade.kit.StringKit;
 import com.blade.mvc.annotation.GetRoute;
 import com.blade.mvc.annotation.Path;
@@ -32,6 +30,7 @@ public class LoginController {
     @PostRoute("login")
     public String doLogin(User user, Request request, Response response) {
 
+        // 入参
         String userName = user.getUsername();
         String passWord = user.getPassword();
 
@@ -43,10 +42,6 @@ public class LoginController {
             request.attribute("error", "密码不能为空");
             return "login.html";
         }
-
-        Environment environment = Blade.of().environment();
-        CommonConstant.USERNAME = environment.get("app.username").get();
-        CommonConstant.PASSWORD = environment.get("app.password").get();
 
         if (!CommonConstant.USERNAME.equalsIgnoreCase(userName) || !CommonConstant.PASSWORD.equalsIgnoreCase(passWord)) {
             request.attribute("error", "用户名或密码错误");
